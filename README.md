@@ -1,239 +1,310 @@
-# StudyMentor AI
+# StudyMentor AI — Student Performance Prediction & LLM Insights
 
-StudyMentor AI is a Machine Learning and Large Language Model (LLM) project developed as part of an AI and Machine Learning capstone.
+StudyMentor AI is an end-to-end Machine Learning and Large Language Model (LLM) project developed as part of an AI and Machine Learning capstone.
 
-The project analyses student academic performance using real educational data and builds machine learning models to predict whether a student is likely to pass or fail. It also integrates a Large Language Model (LLM) to generate easy-to-understand explanations for each prediction.
+The project analyzes student academic performance using the **UCI Student Performance dataset**, builds machine learning models to predict academic outcomes, and integrates an LLM to generate clear explanations for model predictions.
 
-The project is divided into four parts, covering the complete machine learning workflow from data preparation to model deployment and LLM integration.
+## Project Overview
 
-| Project  | StudyMentor AI |
-|--------- |----------------|
-| Language | Python |
-| Dataset  | Student Performance (UCI) |
-| Machine Learning | Scikit-learn |
-| LLM      | OpenRouter API |
-| Models   | Linear Regression, Logistic Regression, Decision Tree, Random Forest, Gradient Boosting |
+| | |
+|---|---|
+| **Language** | Python |
+| **Dataset** | UCI Student Performance Dataset |
+| **ML Framework** | Scikit-learn |
+| **LLM** | OpenRouter API |
+| **Models** | Linear Regression, Logistic Regression, Decision Tree, Random Forest, Gradient Boosting |
+| **API** | FastAPI |
+| **Environment** | Jupyter Notebook, VS Code |
 
-# Project Objectives
+## Objectives
 
-The objectives of this project are:
+- Clean and analyze real-world educational data.
+- Perform exploratory data analysis and feature engineering.
+- Build and compare regression and classification models.
+- Apply cross-validation and hyperparameter tuning.
+- Evaluate models using appropriate performance metrics.
+- Save and reload the best-performing model.
+- Integrate an LLM for prediction explanations.
+- Validate structured LLM responses and apply basic PII safety checks.
 
-- Clean and prepare a real-world dataset.
-- Perform exploratory data analysis (EDA).
-- Build regression and classification models.
-- Compare different machine learning algorithms.
-- Improve model performance using ensemble methods.
-- Tune model hyperparameters using GridSearchCV.
-- Save and reload the best machine learning model.
-- Integrate a Large Language Model (LLM) to explain predictions.
-- Apply structured JSON validation and basic AI safety guardrails.
+## Dataset
 
-# Dataset
+**UCI Student Performance Dataset — Portuguese Language**
 
-Dataset Name - 
-Student Performance Dataset (Portuguese Language)
+The dataset contains **649 student records** with demographic, family, social, and academic attributes collected from secondary school students in Portugal.
 
-Source - 
-UCI Machine Learning Repository
-https://archive.ics.uci.edu/dataset/320/student+performance
+Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/320/student+performance)
 
-Description:
-The dataset contains demographic, family, social and academic information collected from secondary school students in Portugal.
+The Portuguese dataset (`student-por.csv`) was selected because it contains more records than the corresponding Mathematics dataset.
 
-The Portuguese dataset (`student-por.csv`) contains 649 student records and was selected because it provides more training examples than the Mathematics dataset.
+## Machine Learning Workflow
 
-# Project Structure
+```text
+Raw Dataset
+     ↓
+Data Cleaning & Validation
+     ↓
+Exploratory Data Analysis
+     ↓
+Feature Engineering
+     ↓
+Encoding & Scaling
+     ↓
+Train / Test Split
+     ↓
+Model Training
+     ↓
+Cross-Validation & Hyperparameter Tuning
+     ↓
+Model Evaluation
+     ↓
+Best Model Selection
+     ↓
+Prediction API
+     ↓
+LLM-Based Explanation
+```
 
-StudyMentor-AI
-│
-├── part1
-│   ├── data
-│   ├── notebook
-│   ├── output
-│   ├── plots
-│   └── README.md
-│
-├── part2
-│   ├── data
-│   ├── notebook
-│   ├── output
-│   ├── plots
-│   └── README.md
-│
-├── part3
-│   ├── data
-│   ├── notebook
-│   ├── output
-│   ├── plots
-│   └── README.md
-│
-├── part4
-│   ├── data
-│   ├── notebook
-│   ├── output
-│   └── README.md
-│
-├── requirements.txt
-└── README.md
+## 1. Data Preparation & EDA
 
-# Project Workflow
+The first stage focuses on understanding and preparing the dataset.
 
-## Part 1 – Data Acquisition, Cleaning and Exploratory Data Analysis
+Key activities:
 
-This part focuses on understanding and preparing the dataset.
-
-Activities completed:
-
-- Data acquisition
-- Missing value analysis
+- Missing-value analysis
 - Duplicate detection
-- Data type optimisation
+- Data-type validation
 - Descriptive statistics
 - Skewness analysis
 - Outlier detection using IQR
 - Correlation analysis
-- Data visualisation
+- Data visualization
 - Feature exploration
-- Cleaned dataset generation
+- Data cleaning
 
 Output:
-- cleaned_data.csv
 
-## Part 2 – Machine Learning Models
+`cleaned_data.csv`
 
-This part develops both regression and classification models.
+## 2. Machine Learning
 
-Regression models:
+### Regression
+
 - Linear Regression
 - Ridge Regression
 
-Classification models:
+### Classification
+
 - Logistic Regression
-
-Activities completed:
-
-- Feature encoding
-- Feature scaling
-- Train-test split
-- Regression evaluation
-- Classification evaluation
-- Confusion matrix
-- ROC Curve
-- Feature importance analysis
-
-## Part 3 – Advanced Machine Learning
-
-This part improves the classification models using ensemble learning.
-
-Models implemented:
 - Decision Tree
-- Controlled Decision Tree
 - Random Forest
 - Gradient Boosting
 
-Additional tasks:
-- Feature importance
-- Feature ablation study
+### Techniques
+
+- One-hot encoding
+- Feature scaling
+- Train-test split
 - Cross-validation
 - GridSearchCV
-- Machine learning pipeline
-- Manual learning curve
+- Feature importance
+- Feature ablation
+- Learning curves
 - Model serialization using Joblib
 
-Output:
-- best_model.pkl
+## 3. Model Evaluation
 
+Models are evaluated using appropriate classification and regression metrics, including:
 
-## Part 4 – LLM Powered Prediction Explanation
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+- Confusion Matrix
+- Cross-validation performance
 
-This part integrates a Large Language Model (LLM) with the trained machine learning model.
+The final model is selected based on comparative evaluation and cross-validation results.
 
-Activities completed:
+### Model Performance
+
+**Random Forest**
+
+- Cross-validation AUC: **0.9785**
+- Test AUC: **0.9436**
+
+The tuned Random Forest demonstrated strong performance on the held-out test dataset.
+
+## 4. LLM-Powered Prediction Explanation
+
+The trained machine learning model is integrated with an LLM through the **OpenRouter API**.
+
+The LLM receives structured prediction information and generates an easy-to-understand explanation of the result.
+
+### LLM workflow
+
+```text
+Student Input
+     ↓
+Preprocessing
+     ↓
+ML Model
+     ↓
+Prediction + Probability
+     ↓
+Prompt Construction
+     ↓
+OpenRouter LLM
+     ↓
+Structured JSON Response
+     ↓
+Prediction Explanation
+```
+
+Implemented features:
+
 - OpenRouter API integration
 - Prompt engineering
 - Structured JSON output
-- JSON schema validation
+- JSON Schema validation
 - Prediction explanation
 - Temperature comparison
-- PII guardrail
-- End-to-end prediction explanation pipeline
+- PII detection
+- Basic safety guardrails
 
-# Technologies Used
+## API
 
-Programming Language:
-- Python
+The project includes a **FastAPI-based inference layer** for serving model predictions.
 
-Libraries:
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-- Joblib
-- Requests
-- JSONSchema
-- python-dotenv
+Example workflow:
 
-Development Environment
-- Jupyter Notebook
-- Visual Studio Code
+```text
+Client Request
+      ↓
+FastAPI
+      ↓
+Preprocessing
+      ↓
+Trained ML Model
+      ↓
+Prediction
+      ↓
+LLM Explanation
+      ↓
+JSON Response
+```
 
-# Machine Learning Techniques
+## Project Structure
 
-The project demonstrates the following techniques:
+```text
+StudyMentor-AI/
+│
+├── part1/
+│   ├── data/
+│   ├── notebook/
+│   ├── output/
+│   └── plots/
+│
+├── part2/
+│   ├── data/
+│   ├── notebook/
+│   ├── output/
+│   └── plots/
+│
+├── part3/
+│   ├── data/
+│   ├── notebook/
+│   ├── output/
+│   └── plots/
+│
+├── part4/
+│   ├── data/
+│   ├── notebook/
+│   └── output/
+│
+├── models/
+├── requirements.txt
+└── README.md
+```
 
-- Data Cleaning
-- Exploratory Data Analysis (EDA)
-- Feature Engineering
-- One-Hot Encoding
-- Feature Scaling
-- Regression
-- Classification
-- Ensemble Learning
-- Cross Validation
-- Hyperparameter Tuning
-- Pipeline Creation
-- Model Serialization
-- Large Language Model Integration
-- Prompt Engineering
-- Structured Output Validation
+## Technologies
 
-# Results
+**Programming:** Python
 
-The project successfully demonstrates the complete machine learning lifecycle.
+**Data & ML:** Pandas, NumPy, Scikit-learn
 
-Key achievements include:
-- Cleaned and analysed a real-world educational dataset.
-- Built multiple regression and classification models.
-- Compared model performance using ROC-AUC and cross-validation.
-- Improved model performance using ensemble methods.
-- Saved and reloaded the best-performing model.
-- Integrated a Large Language Model to explain predictions.
-- Implemented JSON schema validation.
-- Added PII detection to improve safety before API calls.
+**Visualization:** Matplotlib, Seaborn
 
-# How to Run the Project
+**Model Management:** Joblib
 
-1. Clone this repository.
-2. Install the required libraries.
+**LLM Integration:** OpenRouter API, Requests
+
+**Validation & Configuration:** JSON Schema, python-dotenv
+
+**API:** FastAPI
+
+**Development:** Jupyter Notebook, Visual Studio Code, Git/GitHub
+
+## Key Learning Outcomes
+
+This project demonstrates an end-to-end machine learning workflow covering:
+
+- Data cleaning and EDA
+- Feature engineering
+- Regression and classification
+- Ensemble learning
+- Cross-validation
+- Hyperparameter tuning
+- Model evaluation
+- Feature importance
+- Model serialization
+- API-based model inference
+- LLM integration
+- Prompt engineering
+- Structured output validation
+- Basic AI safety practices
+
+## How to Run
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd StudyMentor-AI
+```
+
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-3. Create a `.env` file in the project root and add your OpenRouter API key.
+### 3. Configure the API key
 
-4. Run the notebooks in the following order:
-- Part 1
-- Part 2
-- Part 3
-- Part 4
-Each notebook uses the outputs generated by the previous part.
+Create a `.env` file:
 
+```text
+OPENROUTER_API_KEY=your_api_key
+```
 
-# Repository Contents
+### 4. Run the notebooks
 
-This repository contains:
+Execute the notebooks in the following order:
+
+```text
+Part 1 → Part 2 → Part 3 → Part 4
+```
+
+Each stage uses outputs generated by the previous stage.
+
+## Repository Contents
+
 - Jupyter notebooks
-- README documentation
-- Trained machine learning model
 - Cleaned dataset
-- Generated outputs
-- Visualisations
+- Trained model
+- ML evaluation results
+- Visualizations
+- LLM integration
+- FastAPI inference code
+- Requirements file
+- Project documentation
